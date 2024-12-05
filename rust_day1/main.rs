@@ -31,7 +31,7 @@ fn step1(list0: &Vec<i32>, list1: &Vec<i32>) {
     println!("Step 1 Total = {}", total);
 }
 
-fn step2(list0: &Vec<i32>, list1: &Vec<i32>) {
+fn step2(list0: &Vec<i32>, list1: &[i32]) {
     let mut total = 0;
     for number in list0 {
         let uccurence = list1.iter().filter(|&x| x == number).count() as i32;

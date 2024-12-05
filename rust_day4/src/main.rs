@@ -31,11 +31,11 @@ fn get_diagonals(list: Vec<&str>) -> (Vec<String>, Vec<String>) {
             anti_diagonals[row + col].push(c);
         }
     }
-    return (main_diagonals, anti_diagonals);
+    (main_diagonals, anti_diagonals)
 }
 
 fn count_xmas(line: &str) -> i32 {
-    return (line.matches("XMAS").count() + line.matches("SAMX").count()) as i32;
+    (line.matches("XMAS").count() + line.matches("SAMX").count()) as i32
 }
 
 fn step1(input: Vec<&str>) {
@@ -75,7 +75,7 @@ fn step2(input: Vec<&str>) {
 }
 
 fn rotate_square(square: &str) -> [char; 9] {
-    return [
+    [
         square.chars().nth(2).unwrap(),
         square.chars().nth(5).unwrap(),
         square.chars().nth(8).unwrap(),
@@ -85,7 +85,7 @@ fn rotate_square(square: &str) -> [char; 9] {
         square.chars().nth(0).unwrap(),
         square.chars().nth(3).unwrap(),
         square.chars().nth(6).unwrap(),
-    ];
+    ]
 }
 
 fn test_x_mas(square: &str) -> bool {
@@ -96,7 +96,7 @@ fn test_x_mas(square: &str) -> bool {
     {
         return true;
     }
-    return false;
+    false
 }
 
 fn test_all_x_mas(square: &str) -> bool {
@@ -108,5 +108,5 @@ fn test_all_x_mas(square: &str) -> bool {
             rotated_square = rotate_square(&rotated_square).iter().collect::<String>();
         }
     }
-    return false;
+    false
 }
