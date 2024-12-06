@@ -1,8 +1,7 @@
-use std::fs::read_to_string;
 use std::iter::zip;
 
 fn main() {
-    let binding = read_to_string("input.txt").unwrap();
+    let binding = include_str!("input.txt");
 
     let mut list0 = binding
         .lines()
