@@ -1,19 +1,19 @@
 use std::iter::zip;
+use std::str::FromStr;
 
 fn main() {
     let binding = include_str!("input.txt");
 
-    let mut list0 = binding
-        .lines()
-        .clone()
-        .map(|s| s.split_whitespace().nth(0).unwrap().parse::<i32>().unwrap())
-        .collect::<Vec<i32>>();
+    let (mut list0, mut list1) =
+        binding
+            .lines()
+            .fold((vec![], vec![]), |(mut lhs, mut rhs), line| {
+                let mut words = line.split_whitespace();
+                lhs.push(words.next().map(i32::from_str).unwrap().unwrap());
+                rhs.push(words.next().unwrap().parse::<i32>().unwrap());
+                (lhs, rhs)
+            });
     list0.sort();
-    let mut list1 = binding
-        .lines()
-        .clone()
-        .map(|s| s.split_whitespace().nth(1).unwrap().parse::<i32>().unwrap())
-        .collect::<Vec<i32>>();
     list1.sort();
 
     step1(&list0, &list1);
