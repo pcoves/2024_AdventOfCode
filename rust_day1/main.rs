@@ -26,11 +26,24 @@ fn step1(list0: &Vec<i32>, list1: &Vec<i32>) {
 }
 
 fn step2(list0: &Vec<i32>, list1: &[i32]) {
-    let mut total = 0;
-    for number in list0 {
-        let uccurence = list1.iter().filter(|&x| x == number).count() as i32;
-        let similarity = number * uccurence;
-        total += similarity;
-    }
+    use std::collections::HashMap;
+
+    let (lhs, rhs) = zip(list0, list1).fold(
+        (HashMap::new(), HashMap::new()),
+        |(mut lhs, mut rhs), (l, r)| {
+            lhs.entry(l)
+                .and_modify(|counter| *counter += 1)
+                .or_insert(1);
+            rhs.entry(r)
+                .and_modify(|counter| *counter += 1)
+                .or_insert(1);
+            (lhs, rhs)
+        },
+    );
+
+    let total = lhs.into_iter().fold(0, |acc, (key, value)| {
+        acc + key * value * rhs.get(&key).unwrap_or(&0)
+    });
+
     println!("Step 2 Total = {}", total);
 }
