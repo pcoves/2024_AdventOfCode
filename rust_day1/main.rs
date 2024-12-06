@@ -21,12 +21,7 @@ fn main() {
 }
 
 fn step1(list0: &Vec<i32>, list1: &Vec<i32>) {
-    let mut total = 0;
-    for it in zip(list0, list1) {
-        let (number0, number1) = it;
-        let diff = (number0 - number1).abs();
-        total += diff;
-    }
+    let total = zip(list0, list1).fold(0, |acc, (lhs, rhs)| acc + (lhs - rhs).abs());
     println!("Step 1 Total = {}", total);
 }
 
